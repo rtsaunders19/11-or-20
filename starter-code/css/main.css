@@ -1,0 +1,22 @@
+body {
+  background-color: green;
+}
+
+header {
+  text-align: center;
+}
+
+section {
+  height: 484px;
+}
+.row1 {
+  height: 242px;
+}
+
+.row2 {
+  height: 242px
+}
+
+.col {
+  height: 242px;
+}
