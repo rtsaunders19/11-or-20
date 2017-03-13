@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
-var cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+var cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-var cardsInPlay = []
+var cardsInPlay = [];
+
+var shuffledCards = [];
 
 var $top = $('.row1')
 
@@ -31,6 +33,7 @@ function shuffle(array) {
 shuffle(cards);
 
 
+
 function dealTop () {
 	for (var i = 0; i<2; i++) {
 		$deal = $('<div>').addClass('deal col col-md-4')
@@ -46,13 +49,13 @@ function dealBottom () {
 		$deal = $('<div>').addClass('deal col col-md-4')
 		$deal.attr('data-card', cards[i]);
 		//$deal.on('click', isTwoCards);
-		$bottom.append($deal);
+    $bottom.append($deal);
 	}
 };
 
 dealTop();
 dealBottom();
 
-shuffledCards = []
+
 
 })
