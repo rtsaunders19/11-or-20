@@ -27,6 +27,8 @@ section {
 
 .press {
   height: 100px;
+  text-align: center;
+  padding-top: 30px;
 }
 
 .name {
