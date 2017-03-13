@@ -35,9 +35,9 @@ function dealTop () {
 	for (var i = 0; i<2; i++) {
 		$deal = $('<div>').addClass('deal col col-md-4')
 		$deal.attr('data-card', cards[i]);
-		$deal.on('click', isTwoCards);
-		$top.appendChild($deal);
-    $deal.eq(1).attr('id', 'faceDown')
+		//$deal.on('click', isTwoCards);
+		$top.append($deal);
+    $('.deal').eq(1).attr('id', 'faceDown');
 	}
 };
 
@@ -45,30 +45,14 @@ function dealBottom () {
   for (var i = 2; i<4; i++) {
 		$deal = $('<div>').addClass('deal col col-md-4')
 		$deal.attr('data-card', cards[i]);
-		$deal.on('click', isTwoCards);
-		$bottom.appendChild($deal);
+		//$deal.on('click', isTwoCards);
+		$bottom.append($deal);
 	}
 };
 
+dealTop();
+dealBottom();
+
 shuffledCards = []
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })
