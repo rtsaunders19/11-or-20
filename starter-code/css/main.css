@@ -14,28 +14,34 @@ section {
 }
 
 .row2 {
+  margin-top: 12px;
   height: 242px
 }
 
-.col {
+.col1, .col2 {
   height: 242px;
+  border-radius: 10px;
 }
 
 #faceDown {
   background-color: black;
 }
 
+img {
+  border-radius: 10px;
+}
+
 .press {
-  height: 100px;
+  height: 120px;
   text-align: center;
   padding-top: 30px;
 }
 
 .name {
-  height: 100px;
+  height: 120px;
 }
 
-
 footer {
-  height: 100px;
+  height: 120px;
+  margin-top: 12px;
 }

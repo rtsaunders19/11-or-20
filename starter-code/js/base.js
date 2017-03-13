@@ -34,7 +34,7 @@ console.log(shuffle(cards));
 
 function dealTop () {
 	for (var i = 0; i<2; i++) {
-		$deal = $('<div>').addClass('deal col col-md-4')
+		$deal = $('<div>').addClass('deal col1 col-md-4')
 	  $deal.attr('data-card', cards[i])
 		//$deal.on('click', isTwoCards);
 		$top.append($deal);
@@ -44,7 +44,7 @@ function dealTop () {
 
 function dealBottom () {
   for (var i = 2; i<4; i++) {
-		$deal = $('<div>').addClass('deal col col-md-4')
+		$deal = $('<div>').addClass('deal col2 col-md-4')
 	  $deal.attr('data-card', cards[i])
 		//$deal.on('click', isTwoCards);
     $bottom.append($deal);
@@ -58,34 +58,38 @@ console.log($('.deal').eq(1).attr('data-card'));
 
 for(var i=0; i<4; i++){
   if($('.deal').eq(i).attr('data-card')==='1') {
-    $('.deal').eq(i).text('1');
+    $('.deal').eq(i).html("<img src='../images/ace-of-spades.png' height='242px' width='290px' alt='ace-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='2') {
-  $('.deal').eq(i).text('2');
+  $('.deal').eq(i).html("<img src='../images/two-of-spades.png' height='242px' width='290px' alt='two-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='3') {
-  $('.deal').eq(i).text('3');
+  $('.deal').eq(i).html("<img src='../images/three-of-spades.png' height='242px' width='290px' alt='three-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='4') {
-  $('.deal').eq(i).text('4');
+  $('.deal').eq(i).html("<img src='../images/four-of-spades.png' height='242px' width='290px' alt='four-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='5') {
-  $('.deal').eq(i).text('5');
+  $('.deal').eq(i).html("<img src='../images/five-of-spades.png' height='242px' width='290px' alt='five-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='6') {
-  $('.deal').eq(i).text('6');
+  $('.deal').eq(i).html("<img src='../images/six-of-spades.png' height='242px' width='290px' alt='six-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='7') {
-  $('.deal').eq(i).text('7');
+  $('.deal').eq(i).html("<img src='../images/seven-of-spades.png' height='242px' width='290px' alt='seven-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='8') {
-  $('.deal').eq(i).text('8');
+  $('.deal').eq(i).html("<img src='../images/eight-of-spades.png' height='242px' width='290px' alt='eight-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='9') {
-  $('.deal').eq(i).text('9');
+  $('.deal').eq(i).html("<img src='../images/nine-of-spades.png' height='242px' width='290px' alt='nine-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='10') {
-  $('.deal').eq(i).text('10');
+  $('.deal').eq(i).html("<img src='../images/ten-of-spades.JPEG' height='242px' width='290px' alt='ten-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='11') {
-  $('.deal').eq(i).text('11');
+  $('.deal').eq(i).html("<img src='../images/jack-of-spades.JPEG' height='242px' width='290px' alt='jack-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='12') {
-  $('.deal').eq(i).text('12');
+  $('.deal').eq(i).html("<img src='../images/queen-of-spades.png' height='242px' width='290px' alt='queen-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='13') {
-  $('.deal').eq(i).text('13');
+  $('.deal').eq(i).html("<img src='../images/king-of-spades.png' height='242px' width='290px' alt='king-of-spades'>");
 }}
 
-$('#faceDown').text('')
+$('#faceDown').html('')
 
+$('.stay').on('click', function(){
+  $('#faceDown').css('background-color', 'none');
+  $('.deal').eq(1).html();
+});
 
 })
