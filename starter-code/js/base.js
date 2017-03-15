@@ -58,6 +58,15 @@ dealBottom();
 
 //console.log($('.deal').eq(1).attr('data-card'));
 
+$('.try').on('click', function(){
+  dealTop();
+  dealBottom();
+  showCards();
+  $('#faceDown').hide();
+  $('.col2').eq(2).hide();
+})
+
+function showCards () {
 for(var i=0; i<5; i++){
   if($('.deal').eq(i).attr('data-card')==='1') {
     $('.deal').eq(i).html("<img src='../images/ace-of-spades.png' height='242px' width='290px' alt='ace-of-spades'>");
@@ -86,6 +95,9 @@ for(var i=0; i<5; i++){
 } else if($('.deal').eq(i).attr('data-card')==='13') {
   $('.deal').eq(i).html("<img src='../images/king-of-spades.png' height='242px' width='290px' alt='king-of-spades'>");
 }}
+}
+
+showCards();
 
 $('#faceDown').hide();
 $('.col2').eq(2).hide();
@@ -174,6 +186,14 @@ var hitResult = function(){
 hitResult();
 
 });
+
+$('.shuffle').on('click', function(){
+  console.log(shuffle(cards));
+  dealersHand=[];
+  playersHand=[];
+  $('.deal').remove()
+})
+
 
 
 })
