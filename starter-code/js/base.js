@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
-var cards = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+var cards = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
 
-var cardsInPlay = [];
+var dealersHand = [];
+
+var playersHand = [];
 
 var $top = $('.row1')
 
@@ -33,20 +35,18 @@ console.log(shuffle(cards));
 
 
 function dealTop () {
-	for (var i = 0; i<2; i++) {
+	for (var i=0; i<2; i++) {
 		$deal = $('<div>').addClass('deal col1 col-md-4')
 	  $deal.attr('data-card', cards[i])
-		//$deal.on('click', isTwoCards);
 		$top.append($deal);
     $('.deal').eq(1).attr('id', 'faceDown');
 	}
 };
 
 function dealBottom () {
-  for (var i = 2; i<4; i++) {
+  for (var i=2; i<5; i++) {
 		$deal = $('<div>').addClass('deal col2 col-md-4')
 	  $deal.attr('data-card', cards[i])
-		//$deal.on('click', isTwoCards);
     $bottom.append($deal);
 	}
 };
@@ -54,9 +54,11 @@ function dealBottom () {
 dealTop();
 dealBottom();
 
-console.log($('.deal').eq(1).attr('data-card'));
 
-for(var i=0; i<4; i++){
+
+//console.log($('.deal').eq(1).attr('data-card'));
+
+for(var i=0; i<5; i++){
   if($('.deal').eq(i).attr('data-card')==='1') {
     $('.deal').eq(i).html("<img src='../images/ace-of-spades.png' height='242px' width='290px' alt='ace-of-spades'>");
 } else if($('.deal').eq(i).attr('data-card')==='2') {
@@ -85,11 +87,37 @@ for(var i=0; i<4; i++){
   $('.deal').eq(i).html("<img src='../images/king-of-spades.png' height='242px' width='290px' alt='king-of-spades'>");
 }}
 
-$('#faceDown').html('')
+$('#faceDown').hide();
+$('.col2').eq(2).hide();
+
 
 $('.stay').on('click', function(){
-  $('#faceDown').css('background-color', 'none');
-  $('.deal').eq(1).html();
+  $('#faceDown').show();
+  for(var i=1; i<3; i++) {
+    var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
+    dealersHand.push(collectDealer);
+}
+  for(var i=0; i<2; i++) {
+    var collectPlayer = parseInt($('.col2').eq(i).attr('data-card'));
+    playersHand.push(collectPlayer);
+}
+console.log(dealersHand);
+console.log(playersHand);
+});
+
+$('.hit').on('click', function(){
+  $('.col2').eq(2).show();
+  $('#faceDown').show();
+  for(var i=1; i<3; i++) {
+    var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
+    dealersHand.push(collectDealer);
+}
+  for(var i=0; i<3; i++) {
+    var collectPlayer = parseInt($('.col2').eq(i).attr('data-card'));
+    playersHand.push(collectPlayer);
+  }
+  console.log(dealersHand);
+  console.log(playersHand);
 });
 
 })
