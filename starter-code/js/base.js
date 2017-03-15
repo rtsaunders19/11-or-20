@@ -145,6 +145,34 @@ $('.hit').on('click', function(){
 }
 console.log(dealersHand);
 console.log(playersHand);
+
+var dealerLowValue = Math.abs(dealersHand[0]+dealersHand[1]-11);
+var dealerHighValue = Math.abs(dealersHand[0]+dealersHand[1]-20)
+var playerLowHitValue = Math.abs(playersHand[0]+playersHand[1]+playersHand[2]-11)
+var playerHighHitValue = Math.abs(playersHand[0]+playersHand[1]+playersHand[2]-20)
+
+console.log(dealerHighValue);
+console.log(dealerLowValue);
+console.log(playerHighHitValue);
+console.log(playerLowHitValue);
+
+var hitResult = function(){
+  if (dealerLowValue < dealerHighValue) {
+      if (playerLowHitValue < playerHighHitValue) {
+        console.log(dealerLowValue <= playerLowHitValue);
+      } else {
+        console.log(dealerLowValue <= playerHighHitValue);
+      }
+} else {
+    if (playerLowHitValue < playerHighHitValue) {
+      console.log(dealerHighValue <= playerLowHitValue);
+    } else {
+      console.log(dealerHighValue <= playerHighHitValue);
+    }
+}}
+
+hitResult();
+
 });
 
 
