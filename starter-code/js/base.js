@@ -103,6 +103,33 @@ $('.stay').on('click', function(){
 }
 console.log(dealersHand);
 console.log(playersHand);
+
+var dealerLowValue = Math.abs(dealersHand[0]+dealersHand[1]-11);
+var dealerHighValue = Math.abs((dealersHand[0]+dealersHand[1])-20)
+var playerLowValue = Math.abs((playersHand[0]+playersHand[1])-11)
+var playerHighValue = Math.abs((playersHand[0]+playersHand[1])-20)
+
+console.log(dealerHighValue);
+console.log(dealerLowValue);
+console.log(playerHighValue);
+console.log(playerLowValue);
+
+var stayResult = function(){
+  if (dealerLowValue < dealerHighValue) {
+      if (playerLowValue < playerHighValue) {
+        console.log(dealerLowValue <= playerLowValue);
+      } else {
+        console.log(dealerLowValue <= playerHighValue);
+      }
+} else {
+    if (playerLowValue < playerHighValue) {
+      console.log(dealerHighValue <= playerLowValue);
+    } else {
+      console.log(dealerHighValue <= playerHighValue);
+    }
+}}
+
+stayResult();
 });
 
 $('.hit').on('click', function(){
@@ -115,9 +142,10 @@ $('.hit').on('click', function(){
   for(var i=0; i<3; i++) {
     var collectPlayer = parseInt($('.col2').eq(i).attr('data-card'));
     playersHand.push(collectPlayer);
-  }
-  console.log(dealersHand);
-  console.log(playersHand);
+}
+console.log(dealersHand);
+console.log(playersHand);
 });
+
 
 })
