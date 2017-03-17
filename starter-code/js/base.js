@@ -10,6 +10,12 @@ var $top = $('.row1')
 
 var $bottom = $('.row2')
 
+var score = 0
+
+var tries = 0
+
+
+
 function shuffle(array) {
     var counter = array.length, temp, index;
 
@@ -105,6 +111,7 @@ $('.col2').eq(2).hide();
 
 $('.stay').on('click', function(){
   $('#faceDown').show();
+  tries++
   for(var i=1; i<3; i++) {
     var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
     dealersHand.push(collectDealer);
@@ -129,24 +136,48 @@ console.log(playerLowValue);
 var stayResult = function(){
   if (dealerLowValue < dealerHighValue) {
       if (playerLowValue < playerHighValue) {
-        console.log(dealerLowValue <= playerLowValue);
+        if (playerLowValue <= dealerLowValue) {
+        score++
+      }
       } else {
-        console.log(dealerLowValue <= playerHighValue);
+        if (playerHighValue <= dealerLowValue) {
+        score++
+      }
       }
 } else {
     if (playerLowValue < playerHighValue) {
-      console.log(dealerHighValue <= playerLowValue);
+      if (playerLowValue <= dealerHighValue) {
+      score++
+    }
     } else {
-      console.log(dealerHighValue <= playerHighValue);
+      if (playerHighValue <= dealerHighValue){
+      score++
+    }
     }
 }}
 
 stayResult();
+
+$('.dealer-hit').text('Score ' + score + '/11 | ' + 'Tries ' + tries + '/20');
+
+if (score===11) {
+  alert('You win!');
+  score=0;
+  tries=0;
+};
+
+if (tries===20 && score<11) {
+  alert('you lose!');
+  score=0;
+  tries=0;
+};
+
 });
 
 $('.hit').on('click', function(){
   $('.col2').eq(2).show();
   $('#faceDown').show();
+  tries++
   for(var i=1; i<3; i++) {
     var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
     dealersHand.push(collectDealer);
@@ -171,19 +202,41 @@ console.log(playerLowHitValue);
 var hitResult = function(){
   if (dealerLowValue < dealerHighValue) {
       if (playerLowHitValue < playerHighHitValue) {
-        console.log(dealerLowValue <= playerLowHitValue);
+        if (playerLowHitValue <= dealerLowValue) {
+        score++
+      }
       } else {
-        console.log(dealerLowValue <= playerHighHitValue);
+        if (playerHighHitValue <= dealerLowValue) {
+        score++
+      }
       }
 } else {
     if (playerLowHitValue < playerHighHitValue) {
-      console.log(dealerHighValue <= playerLowHitValue);
+      if (playerLowHitValue <= dealerHighValue) {
+      score++
+    }
     } else {
-      console.log(dealerHighValue <= playerHighHitValue);
+      if (playerHighHitValue <= dealerHighValue){
+      score++
+    }
     }
 }}
 
 hitResult();
+
+$('.dealer-hit').text('Score ' + score + '/11 | ' + 'Tries ' + tries + '/20');
+
+if (score===11) {
+  alert('You win!')
+  score=0
+  tries=0
+};
+
+if (tries===20 && score<11) {
+  alert('you lose!')
+  score=0
+  tries=0
+};
 
 });
 
