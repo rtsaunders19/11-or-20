@@ -6,6 +6,10 @@ header {
   text-align: center;
 }
 
+h1 {
+  font-family: 'Lobster', cursive;
+}
+
 section {
   height: 484px;
 }
@@ -15,7 +19,7 @@ section {
 
 .row2 {
   margin-top: 12px;
-  height: 242px
+  height: 242px;
 }
 
 .col1, .col2 {
@@ -28,22 +32,30 @@ section {
   font-size: 20px;
   padding-top: 30px;
   border: red double 4px;
+  font-family: 'Lobster', cursive;
 }
 
 img {
   border-radius: 10px;
 }
 
-.press {
+.press, .name {
   height: 120px;
   text-align: center;
   padding-top: 30px;
 }
 
-.name {
-  height: 120px;
-  text-align: center;
-  padding-top: 30px
+button {
+  border: black 1px solid;
+  border-radius: 30px;
+  background-color: green;
+  font-family: 'Lobster', cursive;
+  color: black;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
 }
 
 footer {
