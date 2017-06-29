@@ -4,9 +4,9 @@ alert('11 0r 20? is the name of the game and it is a lot like blackjack in that 
 
 var cards = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
 
-var dealersHand = [];
+var dealersHand = 0;
 
-var playersHand = [];
+var playersHand = 0;
 
 var $top = $('.row1')
 
@@ -17,6 +17,8 @@ var score = 0
 var tries = 0
 
 var clicks = 0
+
+var hit = 0
 
 //this hides player 2
 
@@ -64,6 +66,15 @@ function dealBottom () {
     $bottom.append($deal);
 	}
 };
+
+function addValues() {
+  for(var i=1; i<3; i++) {
+    dealersHand+=parseInt($('.col1').eq(i).attr('data-card'));
+  }
+  for(var i=0; i<2; i++) {
+    playersHand+=parseInt($('.col2').eq(i).attr('data-card'));
+  }
+}
 
 //function gives a card image according the the value the div receives from the shuffled cards array
 
@@ -119,10 +130,10 @@ console.log(shuffle(cards));
 dealTop();
 dealBottom();
 showCards();
+addValues();
 //setting the dealers second card to hide and also hidding the player 'hit' card
 $('#faceDown').hide();
 $('.col2').eq(2).hide();
-
 
 
 
@@ -135,53 +146,58 @@ $('.try').on('click', function(){
   if (clicks===1) {
     clicks--
     $('.deal').remove();
-    dealersHand=[];
-    playersHand=[];
+    dealersHand=0;
+    playersHand=0;
     console.log(shuffle(cards));
     dealTop();
     dealBottom();
     showCards();
+    addValues();
+    //putting the dealers card values and players card values into respective arrays
+
   //these next two methods hide the dealers second card and the player's third card
     $('#faceDown').hide();
     $('.col2').eq(2).hide();
-}
+  }
+});
+
+
+
+
+
+$('.hit').on('click', function(){
+  $('.col2').eq(2).show();
+  playersHand+=parseInt($('.col2').eq(2).attr('data-card'));
+  checkHands();
+});
+
+$('.stay').on('click', function(){
+  checkHands();
 })
-
-
-
 
 //clicking on stay collects the dealer and players card values and changes them from
 //strings to numbers and puts them into the collectDealer and collectPlayer array
-$('.stay').on('click', function(){
+function checkHands(){
   if (clicks<1) {
   $('#faceDown').show();
   tries++
   clicks++
   console.log(clicks);
-  for(var i=1; i<3; i++) {
-    var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
-    dealersHand.push(collectDealer);
-}
-  for(var i=0; i<2; i++) {
-    var collectPlayer = parseInt($('.col2').eq(i).attr('data-card'));
-    playersHand.push(collectPlayer);
-}
-console.log(dealersHand);
-console.log(playersHand);
-
+  console.log('dealers hand', dealersHand);
+  console.log('players hand', playersHand);
 //this variable finds the difference between the sum of the two card values and 11 and 20
 
-var dealerLowValue = Math.abs(dealersHand[0]+dealersHand[1]-11);
-var dealerHighValue = Math.abs((dealersHand[0]+dealersHand[1])-20)
-var playerLowValue = Math.abs((playersHand[0]+playersHand[1])-11)
-var playerHighValue = Math.abs((playersHand[0]+playersHand[1])-20)
+var dealerLowValue = Math.abs(dealersHand-11);
+var dealerHighValue = Math.abs(dealersHand-20)
+var playerLowValue = Math.abs(playersHand-11)
+var playerHighValue = Math.abs(playersHand-20)
 
 //dealerHighValue is the defference between the sum and 20 and low value difference between 11
 
-console.log(dealerHighValue);
-console.log(dealerLowValue);
-console.log(playerHighValue);
-console.log(playerLowValue);
+console.log('dealerHighValue', dealerHighValue);
+console.log('dealerLowValue', dealerLowValue);
+console.log('playerHighValue', playerHighValue);
+console.log('playerLowValue', playerLowValue);
 
 //this function finds out the dealers lower difference and the players lower difference and compares them
 // to do this we first find out if it's the dealer's high value that we're going to be using or the dealers low value.
@@ -236,92 +252,8 @@ if (tries===20 && score<11) {
 };
 
 }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-$('.hit').on('click', function(){
-  if (clicks<1) {
-  $('.col2').eq(2).show();
-  $('#faceDown').show();
-  tries++
-  clicks++
-  console.log(clicks);
-  for(var i=1; i<3; i++) {
-    var collectDealer = parseInt($('.col1').eq(i).attr('data-card'));
-    dealersHand.push(collectDealer);
-}
-  for(var i=0; i<3; i++) {
-    var collectPlayer = parseInt($('.col2').eq(i).attr('data-card'));
-    playersHand.push(collectPlayer);
-}
-console.log(dealersHand);
-console.log(playersHand);
-
-var dealerLowValue = Math.abs(dealersHand[0]+dealersHand[1]-11);
-var dealerHighValue = Math.abs(dealersHand[0]+dealersHand[1]-20)
-var playerLowHitValue = Math.abs(playersHand[0]+playersHand[1]+playersHand[2]-11)
-var playerHighHitValue = Math.abs(playersHand[0]+playersHand[1]+playersHand[2]-20)
-
-console.log(dealerHighValue);
-console.log(dealerLowValue);
-console.log(playerHighHitValue);
-console.log(playerLowHitValue);
-
-var hitResult = function(){
-  if (dealerLowValue < dealerHighValue) {
-      if (playerLowHitValue < playerHighHitValue) {
-        if (playerLowHitValue <= dealerLowValue) {
-        score++
-      }
-      } else {
-        if (playerHighHitValue <= dealerLowValue) {
-        score++
-      }
-      }
-} else {
-    if (playerLowHitValue < playerHighHitValue) {
-      if (playerLowHitValue <= dealerHighValue) {
-      score++
-    }
-    } else {
-      if (playerHighHitValue <= dealerHighValue){
-      score++
-    }
-    }
-}}
-
-hitResult();
-
-$('.gameScore').text('Score ' + score + '/11 | ' + 'Tries ' + tries + '/20');
-
-if (score===11) {
-  alert('You Win!');
-  score=0;
-  tries=0;
-  $('.player1').toggle();
-  $('.player2').toggle();
 };
 
-if (tries===20 && score<11) {
-  alert('you lose!');
-  score=0;
-  tries=0;
-  $('.player1').toggle();
-  $('.player2').toggle();
-};
-}
-});
 
 
 })
