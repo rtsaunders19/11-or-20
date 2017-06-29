@@ -44,8 +44,6 @@ function shuffle(array) {
     return array;
 }
 
-console.log(shuffle(cards));
-
 //deal the dealers hand by creating divs and assigning them values from the card
 
 function dealTop () {
@@ -57,7 +55,7 @@ function dealTop () {
 	}
 };
 
-//deal the players hand starting at the third value of the cards array and ending at the 4th
+//deal the players hand starting at index 2 of the cards array and ending before index 5
 
 function dealBottom () {
   for (var i=2; i<5; i++) {
@@ -66,21 +64,6 @@ function dealBottom () {
     $bottom.append($deal);
 	}
 };
-
-dealTop();
-dealBottom();
-
-
-
-//button deals the cards by calling functions
-
-$('.try').on('click', function(){
-  dealTop();
-  dealBottom();
-  showCards();
-  $('#faceDown').hide();
-  $('.col2').eq(2).hide();
-})
 
 //function gives a card image according the the value the div receives from the shuffled cards array
 
@@ -128,17 +111,49 @@ for(var i=0; i<5; i++){
 }}
 }
 
+
+
+
+//all of our functions are defined we run them here as soon as the page loads to start the game
+console.log(shuffle(cards));
+dealTop();
+dealBottom();
 showCards();
-
 //setting the dealers second card to hide and also hidding the player 'hit' card
-
 $('#faceDown').hide();
 $('.col2').eq(2).hide();
 
+
+
+
+
+//removing the div cards which are all of the divs with the class 'deal'
+//clearing dealers hand array and players hand array
+//shuffling the cards
+//button deals the cards by calling the functions
+$('.try').on('click', function(){
+  if (clicks===1) {
+    clicks--
+    $('.deal').remove();
+    dealersHand=[];
+    playersHand=[];
+    console.log(shuffle(cards));
+    dealTop();
+    dealBottom();
+    showCards();
+  //these next two methods hide the dealers second card and the player's third card
+    $('#faceDown').hide();
+    $('.col2').eq(2).hide();
+}
+})
+
+
+
+
 //clicking on stay collects the dealer and players card values and changes them from
 //strings to numbers and puts them into the collectDealer and collectPlayer array
-
 $('.stay').on('click', function(){
+  if (clicks<1) {
   $('#faceDown').show();
   tries++
   clicks++
@@ -169,24 +184,31 @@ console.log(playerHighValue);
 console.log(playerLowValue);
 
 //this function finds out the dealers lower difference and the players lower difference and compares them
-
+// to do this we first find out if it's the dealer's high value that we're going to be using or the dealers low value.
+// once we find that out it is just a matter of finding out whether to compare that value to the player's
+// high or low value. So this function is split up into two sections. One for if the dealer's low value is
+// better (top) and one if the dealers high value is better (bottom).
 var stayResult = function(){
   if (dealerLowValue < dealerHighValue) {
       if (playerLowValue < playerHighValue) {
+        //compares dealer low value
         if (playerLowValue <= dealerLowValue) {
         score++
       }
       } else {
+        //compares dealer low value
         if (playerHighValue <= dealerLowValue) {
         score++
       }
       }
 } else {
     if (playerLowValue < playerHighValue) {
+      //compares dealer high value
       if (playerLowValue <= dealerHighValue) {
       score++
     }
     } else {
+      //compares dealer high value
       if (playerHighValue <= dealerHighValue){
       score++
     }
@@ -213,10 +235,23 @@ if (tries===20 && score<11) {
   $('.player2').toggle();
 };
 
-
+}
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 $('.hit').on('click', function(){
+  if (clicks<1) {
   $('.col2').eq(2).show();
   $('#faceDown').show();
   tries++
@@ -285,16 +320,8 @@ if (tries===20 && score<11) {
   $('.player1').toggle();
   $('.player2').toggle();
 };
-
+}
 });
-
-$('.shuffle').on('click', function(){
-  console.log(shuffle(cards));
-  dealersHand=[];
-  playersHand=[];
-  $('.deal').remove()
-})
-
 
 
 })
