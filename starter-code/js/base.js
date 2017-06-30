@@ -131,11 +131,10 @@ dealTop();
 dealBottom();
 showCards();
 addValues();
-var dealersFirstCard = parseInt($('.col1').eq(1).attr('data-card'))
 //setting the dealers second card to hide and also hidding the player 'hit' card
 $('#faceDown').hide();
 $('.col2').eq(2).hide();
-$('#dealer-hand').text(dealersFirstCard);
+$('#dealer-hand').text(parseInt($('.col1').eq(1).attr('data-card')));
 $('#player-hand').text(playersHand);
 
 
@@ -160,7 +159,7 @@ $('.try').on('click', function(){
   //these next two methods hide the dealers second card and the player's third card
     $('#faceDown').hide();
     $('.col2').eq(2).hide();
-    $('#dealer-hand').text(dealersFirstCard);
+    $('#dealer-hand').text(parseInt($('.col1').eq(1).attr('data-card')));
     $('#player-hand').text(playersHand);
   }
 });
@@ -170,7 +169,7 @@ $('.try').on('click', function(){
 
 
 $('.hit').on('click', function(){
-  $('#dealer-hand').text(dealersFirstCard + parseInt($('.col1').eq(2).attr('data-card')));
+  $('#dealer-hand').text(parseInt($('.col1').eq(1).attr('data-card')) + parseInt($('.col1').eq(2).attr('data-card')));
   $('#player-hand').text(playersHand + parseInt($('.col2').eq(2).attr('data-card')));
   $('.col2').eq(2).show();
   playersHand+=parseInt($('.col2').eq(2).attr('data-card'));
@@ -178,7 +177,7 @@ $('.hit').on('click', function(){
 });
 
 $('.stay').on('click', function(){
-  $('#dealer-hand').text(dealersFirstCard + parseInt($('.col1').eq(2).attr('data-card')));
+  $('#dealer-hand').text(parseInt($('.col1').eq(1).attr('data-card')) + parseInt($('.col1').eq(2).attr('data-card')));
   checkHands();
 })
 
